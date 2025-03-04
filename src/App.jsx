@@ -1,10 +1,12 @@
 import { useState } from 'react'
-
+import QRCodeScanner from './components/QRCodeScanner'
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-      <h1 className='text-lg font-semibold'>Hello world!</h1>
+    <div>
+    <h1 className="text-2xl font-bold text-center my-4">QR Scanner App</h1>
+    <QRCodeScanner />
+  </div>
   )
 }
 
