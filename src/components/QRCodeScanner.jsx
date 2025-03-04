@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 
-export default function QRCodeScanner() {
+function QRCodeScanner() {
   const [data, setData] = useState('');
   const [scan, setScan] = useState(false);
+  const [bgColor, setBgColor] = useState('');
   let scanner;
 
   useEffect(() => {
@@ -12,6 +13,8 @@ export default function QRCodeScanner() {
       scanner.render(
         (result) => {
           setData(result);
+          setBgColor('bg-green-500');
+          setTimeout(() => setBgColor(''), 500);
         },
         (error) => console.error(error)
       );
@@ -24,10 +27,10 @@ export default function QRCodeScanner() {
   }, [scan]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+    <div className={`flex flex-col items-center justify-center min-h-screen p-4 ${bgColor}`}>
       <div className="w-full max-w-md shadow-lg">
         <div className="p-6">
-          <h2 className="text-xl font-bold mb-4">QR Code Scanner</h2>
+          <h2 className="text-xl font-bold mb-4">Attendance Scanner</h2>
           {scan && <div id="reader" className="w-full mb-4"></div>}
           {data && <div className="mt-4 text-center">
             <p>Scanned Result:</p>
@@ -41,3 +44,5 @@ export default function QRCodeScanner() {
     </div>
   );
 }
+
+export default QRCodeScanner;
