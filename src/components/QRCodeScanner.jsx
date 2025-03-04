@@ -12,8 +12,6 @@ export default function QRCodeScanner() {
       scanner.render(
         (result) => {
           setData(result);
-          setScan(false);
-          scanner.clear();
         },
         (error) => console.error(error)
       );
@@ -30,14 +28,14 @@ export default function QRCodeScanner() {
       <div className="w-full max-w-md shadow-lg">
         <div className="p-6">
           <h2 className="text-xl font-bold mb-4">QR Code Scanner</h2>
-          {scan ? <div id="reader" className="w-full mb-4"></div> : <p className="text-center mb-4">Click "Start Scan" to scan QR codes</p>}
+          {scan && <div id="reader" className="w-full mb-4"></div>}
+          {data && <div className="mt-4 text-center">
+            <p>Scanned Result:</p>
+            <textarea className="border p-2 w-full" readOnly value={data}></textarea>
+          </div>}
           <div className="mt-4 flex justify-center gap-4">
             <button className="bg-blue-500 text-white py-2 px-4 rounded" onClick={() => setScan(!scan)}>{scan ? 'Stop Scan' : 'Start Scan'}</button>
           </div>
-          {data && <div className="mt-4 text-center">
-            <p>Result:</p>
-            <textarea className="border p-2 w-full" readOnly value={data}></textarea>
-          </div>}
         </div>
       </div>
     </div>
