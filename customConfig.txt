@@ -1,0 +1,2 @@
+// to run the publicly
+npm run dev -- --host 0.0.0.0
