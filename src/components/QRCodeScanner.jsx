@@ -72,7 +72,6 @@ function QRCodeScanner() {
         </div>
       </div>
     </div>
-    
   );
 }
 
