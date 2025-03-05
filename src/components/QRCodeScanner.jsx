@@ -56,7 +56,7 @@ function QRCodeScanner() {
             <div className="p-2 ">
               {scan && <div id="reader" className="w-full mb-4"></div>}
               <div className="mt-4 flex justify-center gap-4">
-                {!scan && (<button className="bg-blue-200 text-white py-2 px-4 rounded" onClick={() => setScan(true)}>Start Scan</button>)}
+                {!scan && (<button className="bg-sky-600 text-white py-2 px-4 rounded" onClick={() => setScan(true)}>Start Scan</button>)}
               </div>
             </div>
           </div>
