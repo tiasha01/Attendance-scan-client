@@ -21,7 +21,10 @@ function Login(props){
       }
     return(
         <>
-            <div className="flex items-center justify-center h-svh bg-gray-100">
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-16">
+                <div className="flex font-semibold from-neutral-600 text-4xl mb-10">
+                    <h5>Attendance Scan</h5>
+                </div>
                 <div className="w-full max-w-sm p-6 bg-white shadow-lg rounded-lg">
                     <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
                     <input
@@ -30,7 +33,7 @@ function Login(props){
                         className="border p-2 w-full mb-2"
                         value={username}
                         onChange={handleUsernameChange}
-                    />
+                        />
                     <input
                         type="password"
                         placeholder="Password"
