@@ -23,6 +23,7 @@ function QRCodeScanner() {
       });
       scanner.render(
         (result) => {
+          console.log(result); // logging
           try {
             readJsonData = JSON.parse(result);
           } catch (error) {
@@ -36,9 +37,7 @@ function QRCodeScanner() {
           setDataAvailable(true);
           setTimeout(() => setQrBoxColor(qrBoxColor), 800);
         },
-        (error) => {
-
-        }
+        (error) => {}
       );
     }
     return () => {
@@ -64,13 +63,33 @@ function QRCodeScanner() {
             </div>
           </div>
           <div className="flex flex-col mt-4 bg-slate-300 rounded-md">
-            {dataAvailable && <div className=" text-center w-full h-full">
-              {/*<p className="text-xl">Scanned Result:</p>*/}
-              <p className="text-lg">Student Name: {studentName}</p>
-              <p className="text-lg">Student Class: {studentClass}</p>
-              <p className="text-lg">Student Section: {studentSection}</p>
-              <p className="text-lg">Student Roll: {studentRoll}</p>
-            </div>}
+            {dataAvailable && <table className="table-auto border-collapse border border-slate-400 w-full text-center">
+              <thead>
+                <tr className="bg-sky-600 text-white">
+                  <th className="border border-slate-400 p-2">Field</th>
+                  <th className="border border-slate-400 p-2">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-slate-400 p-2">Student Name</td>
+                  <td className="border border-slate-400 p-2">{studentName}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-400 p-2">Student Class</td>
+                  <td className="border border-slate-400 p-2">{studentClass}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-400 p-2">Student Section</td>
+                  <td className="border border-slate-400 p-2">{studentSection}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-400 p-2">Student Roll</td>
+                  <td className="border border-slate-400 p-2">{studentRoll}</td>
+                </tr>
+              </tbody>
+            </table>
+            }
           </div>
         </div>
       </div>
