@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Html5QrcodeScanner, Html5QrcodeScanType} from 'html5-qrcode';
 import Footer from './Footer';
+import axios from 'axios';
 
 function QRCodeScanner() {
   const [dataAvailable, setDataAvailable] = useState(false);
@@ -10,7 +11,30 @@ function QRCodeScanner() {
   const [studentClass, setStudentClass] = useState('');
   const [studentSection, setStudentSection] = useState('');
   const [studentRoll, setStudentRoll] = useState('');
-  let scanner, readJsonData;
+  let scanner, readJsonData, requestStatus;
+
+  function sendData(readJsonData){
+    axios.post('', {
+      student_id: readJsonData.student_id,
+      student_name: readJsonData.student_name,
+      class: readJsonData.class,
+      section: readJsonData.section,
+      roll_no: readJsonData.roll_no,
+      parent_phone: readJsonData.parent_phone,
+      blood_group: readJsonData.blood_group
+    })
+    .then(function (response){
+      if(response.status == 200){
+        setQrBoxColor('bg-green-500');
+        requestStatus="OK";
+      }
+    })
+    .catch(function (error){
+      setQrBoxColor('bg-red-500');
+      requestStatus="ERR";
+    })
+    setTimeout(() => setQrBoxColor(qrBoxColor), 1000);
+  }
 
   useEffect(() => {
     if (scan) {
@@ -22,19 +46,19 @@ function QRCodeScanner() {
       });
       scanner.render(
         (result) => {
-          console.log(result); // logging
           try {
             readJsonData = JSON.parse(result);
           } catch (error) {
             console.error("Invalid JSON", error);
           }
-          setStudentName(readJsonData.student_name);
-          setStudentClass(readJsonData.class);
-          setStudentSection(readJsonData.section);
-          setStudentRoll(readJsonData.roll_no);
-          setQrBoxColor('bg-green-500');
-          setDataAvailable(true);
-          setTimeout(() => setQrBoxColor(qrBoxColor), 1000);
+          sendData(readJsonData);
+          if(requestStatus==="OK"){
+            setStudentName(readJsonData.student_name);
+            setStudentClass(readJsonData.class);
+            setStudentSection(readJsonData.section);
+            setStudentRoll(readJsonData.roll_no);
+            setDataAvailable(true);
+          }
         },
         (error) => {}
       );
