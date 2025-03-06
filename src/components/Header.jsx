@@ -5,7 +5,7 @@ function Header(props){
                 <h1 className="text-lg font-bold">Attendance Scanner</h1>
                 <div className="flex items-center gap-4">
                 <span className="text-white font-semibold">{props.username}</span>
-                <button className="bg-sky-600 text-white py-2 px-4 rounded hover:bg-blue-600"onClick={props.onLogout}>Logout
+                <button className="bg-red-700 text-white py-2 px-4 rounded hover:bg-red-600"onClick={props.onLogout}>Logout
                 </button>
                 </div>
             </div>
